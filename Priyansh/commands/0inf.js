@@ -24,7 +24,7 @@ module.exports.run = async function({ api, event, args, client, Users, Threads, 
     var juswa = moment.tz("Asia/Dhaka").format("『D/MM/YYYY』 【HH:mm:ss】");
     
     // 🔁 YAHAN APNA IMAGE LINK LAGAO
-    var link = ["https://i.imgur.com/eDbdlvd.jpg"];
+    var link = ["https://i.imgur.com/PlevOMP.jpeg"];
     
     var callback = () => api.sendMessage({
         body: `╔══════════════════╗
@@ -32,7 +32,7 @@ module.exports.run = async function({ api, event, args, client, Users, Threads, 
                ╚══════════════════╝
 
                🤖 Bot    : ${global.config.BOTNAME}
-               👑 Owner  : 𝐀𝐫𝐲𝐚𝐧 (" https://www.facebook.com/share/18pkJCQsVz/ ")
+               👑 Owner  : 𝐀𝐫𝐲𝐚𝐧 https://www.facebook.com/share/18pkJCQsVz/ 
                🔰 Prefix : ${global.config.PREFIX}
 
                ───────────────
