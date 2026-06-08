@@ -1,12 +1,12 @@
 module.exports.config = {
-	name: "pair7",
-	version: "1.0.1",
-	hasPermssion: 0,
-	credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-	description: "",
-	commandCategory: "Picture",
-	cooldowns: 5,
-	dependencies: {
+    name: "pair",
+    version: "1.0.1",
+    hasPermssion: 0,
+    credits: "𝐀𝐫𝐲𝐚𝐧",
+    description: "Pairing system - Randomly pair with group members",
+    commandCategory: "Fun",
+    cooldowns: 5,
+    dependencies: {
         "axios": "",
         "fs-extra": ""
     }
@@ -18,7 +18,7 @@ module.exports.onLoad = async() => {
     const dirMaterial = __dirname + `/cache/canvas/`;
     const path = resolve(__dirname, 'cache/canvas', 'pairing.jpg');
     if (!existsSync(dirMaterial + "canvas")) mkdirSync(dirMaterial, { recursive: true });
-    if (!existsSync(path)) await downloadFile("https://i.pinimg.com/736x/15/fa/9d/15fa9d71cdd07486bb6f728dae2fb264.jpg", path);
+    if (!existsSync(path)) await downloadFile("https://i.imgur.com/dgDZwmI.jpeg", path);
 }
 
 async function makeImage({ one, two }) {
@@ -61,21 +61,37 @@ module.exports.run = async function({ api, event, args, Users, Threads, Currenci
   const axios = require("axios");
     const fs = require("fs-extra");
     const { threadID, messageID, senderID } = event;
+    const moment = require("moment-timezone");
+    const time = moment.tz("Asia/Kolkata").format("hh:mm A");
+    
     var tl = ['21%', '67%', '19%', '37%', '17%', '96%', '52%', '62%', '76%', '83%', '100%', '99%', "0%", "48%"];
-        var tle = tl[Math.floor(Math.random() * tl.length)];
-        let dataa = await api.getUserInfo(event.senderID);
-        let namee = await dataa[event.senderID].name
-        let loz = await api.getThreadInfo(event.threadID);
-        var emoji = loz.participantIDs;
-        var id = emoji[Math.floor(Math.random() * emoji.length)];
-        let data = await api.getUserInfo(id);
-        let name = await data[id].name
-        var arraytag = [];
-                arraytag.push({id: event.senderID, tag: namee});
-                arraytag.push({id: id, tag: name});
-        
-        var sex = await data[id].gender;
-        var gender = sex == 2 ? "Male🧑" : sex == 1 ? "Female👩‍  " : "Tran Duc Bo";
-var one = senderID, two = id;
-    return makeImage({ one, two }).then(path => api.sendMessage({ body: `Congrats ${namee} has been paired with ${name}\nThe Match rate is: ${tle}`, mentions: arraytag, attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
-                                          }
+    var tle = tl[Math.floor(Math.random() * tl.length)];
+    
+    let dataa = await api.getUserInfo(event.senderID);
+    let namee = await dataa[event.senderID].name
+    let loz = await api.getThreadInfo(event.threadID);
+    var emoji = loz.participantIDs;
+    var id = emoji[Math.floor(Math.random() * emoji.length)];
+    
+    // Ensure not pairing with self
+    while (id === senderID) {
+        id = emoji[Math.floor(Math.random() * emoji.length)];
+    }
+    
+    let data = await api.getUserInfo(id);
+    let name = await data[id].name
+    var arraytag = [];
+    arraytag.push({id: event.senderID, tag: namee});
+    arraytag.push({id: id, tag: name});
+    
+    var sex = await data[id].gender;
+    var gender = sex == 2 ? "Male🧑" : sex == 1 ? "Female👩‍  " : "Unknown";
+    
+    var one = senderID, two = id;
+    
+    return makeImage({ one, two }).then(path => api.sendMessage({ 
+        body: `✦ 𝐏𝐀𝐈𝐑 𝐅𝐎𝐔𝐍𝐃 ✦\n━━━━━━━━━━━━━━\n\n${namee} 💞 ${name}\n\n📊 Match: ${tle}\n━━━━━━━━━━━━━━\n\n✨ Owner: 𝐀𝐫𝐲𝐚𝐧`, 
+        mentions: arraytag, 
+        attachment: fs.createReadStream(path) 
+    }, threadID, () => fs.unlinkSync(path), messageID));
+		}
