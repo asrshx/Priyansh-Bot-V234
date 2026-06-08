@@ -17,12 +17,12 @@
     "PASSWORD": "",
     "OTPKEY": "",
     "BOTNAME": "ARYAN [ BOT ]",
-    "PREFIX": "/",
+    "PREFIX": "!",
     "ADMINBOT": [
-        "100037743553265"
+        "61565281473392"
     ],
     "NDH": [
-        "100037743553265"
+        "61565281473392"
     ],
     "DATABASE": {
         "sqlite": {
