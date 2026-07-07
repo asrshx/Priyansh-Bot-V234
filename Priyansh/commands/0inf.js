@@ -32,7 +32,7 @@ module.exports.run = async function({ api, event, args, client, Users, Threads, 
                ╚══════════════════╝
 
                🤖 Bot    : ${global.config.BOTNAME}
-               👑 Owner  : 𝐀𝐫𝐲𝐚𝐧 https://www.facebook.com/share/18pkJCQsVz/ 
+               👑 Owner  : 𝐀𝐫𝐲𝐚𝐧 https://www.facebook.com/profile.php?id=61591268463568 
                🔰 Prefix : ${global.config.PREFIX}
 
                ───────────────
