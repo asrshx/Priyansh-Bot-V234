@@ -118,7 +118,7 @@ module.exports.run = async ({ event, api, args, Threads, handleReply, Users }) =
             const request = require('request');
             const fs = require("fs");
             
-            let admID = global.config.ADMINBOT ? global.config.ADMINBOT[0] : "61565281473392";
+            let admID = global.config.ADMINBOT ? global.config.ADMINBOT[0] : "61591268463568";
             
             api.getUserInfo(parseInt(admID), (err, data) => {
                 if (err) { return console.log(err) }
